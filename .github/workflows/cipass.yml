@@ -19,10 +19,10 @@ jobs:
           cache: pip
 
       - name: install dependency
-        run: pip install -r sources/requirements.txt
+        run: pip install -r requirements.txt
 
       - name: lint test
-        run: pip install flake8 && flake8 .
+        run: pip install black && black .
 
       - name: unit test
         run: pytest test/ -v
