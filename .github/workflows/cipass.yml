@@ -1,0 +1,28 @@
+
+name: ci pass test
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: setup python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.x
+          cache: pip
+
+      - name: install dependency
+        run: pip install -r sources/requirements.txt
+
+      - name: lint test
+        run: pip install flake8 && flake8 .
+
+      - name: unit test
+        run: pytest test/ -v
